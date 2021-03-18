@@ -1,0 +1,33 @@
+{
+  "name": "@kth/npm-template",
+  "version": "1.0.0",
+  "automaticPublish": "true",
+  "description": "Template repo for npm-packages. Also test for Evolene npm publishing. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=development node_modules/mocha/bin/mocha ./test/test-*.js ./test/**/test-*.js",
+    "build": "npm install && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KTH/npm-template.git"
+  },
+  "keywords": [
+    "npm",
+    "kth"
+  ],
+  "author": {
+    "name": "KTH",
+    "email": "infosys@kth.se",
+    "url": "https://github.com/KTH"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KTH/npm-template/issues"
+  },
+  "homepage": "https://github.com/KTH/npm-template#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1"
+  }
+}
