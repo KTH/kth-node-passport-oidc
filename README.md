@@ -1,30 +1,43 @@
-# Steps to make your own NPM package.
+# KTH Node Passport OpenID Connect
 
-1. **Copy this npm-template** and rename it to something you like.
-2. **Add a new job under [npm in Jenkins](https://build.sys.kth.se/view/npm/)**. Copy an existing npm job like _npm-template_, Name it to the same name as your repository.
-3. Under _configuration_ in the new job **change Git URL and Git repo-name**.
-4. **Add the build to [Travis CI](https://travis-ci.org/organizations/KTH/repositories)**
-5. **Remove this orderd list** from your README.md and update the stuff below with your package information.
-6. 💥 🎉 Happy Coding!
+NPM: https://www.npmjs.com/package/@kth/kth-node-passport-oidc
 
-**Publishing to npm is now automatic**. Every time you push Evolene will run `npm run-script build`. After that Evolene will check to see if the version in package.json is newer then on npm.com. If so, a new version is published to npm.
+Simple and configurable package for OpenID Connect authentication. Based on [node-openid-client](https://github.com/panva/node-openid-client) and gives you Express middleware based on Passport.
 
-*Reminder:* If you forget to update the version Evolene will run npm run-script build, but *without publishing* to the registy.
+Supports login and Silent login.
 
+## Quick start
 
-# NPM Template ![alt text](https://api.travis-ci.org/KTH/npm-template.svg?branch=master)
+### Used with node-web template
 
-NPM: https://www.npmjs.com/package/@kth/npm-template
+```js
+const { OpenIDConnect, hasGroup } = require("@kth/kth-node-passport-oidc");
 
-## How to use
+const oidc = new OpenIDConnect(server, {
+  ...config.oidc,
+  appCallbackUrl: _addProxy("/auth/callback"),
+  appCallbackSilentUrl: _addProxy("/auth/silent/callback"),
+  defaultRedirect: _addProxy(""),
+  failureRedirect: _addProxy(""),
+  extendUser: (user) => {
+    user.isAdmin = hasGroup(config.auth.adminGroup, user);
+  },
+});
 
-```javascript
-const package = require("npm-template");
-
-if (package.isWorking()) {
-  console.log("Hello World!");
-}
+// And use the middleware with your routes
+appRoute.get(
+  "node.page",
+  _addProxy("/silent"),
+  oidc.silentLogin,
+  Sample.getIndex
+);
+appRoute.get("node.index", _addProxy("/"), oidc.login, Sample.getIndex);
+appRoute.get("node.page", _addProxy("/:page"), oidc.login, Sample.getIndex);
 ```
+
+# API Documentation
+
+## Oidc
 
 ## Run tests
 
