@@ -26,7 +26,7 @@
 <dd></dd>
 <dt><a href="#logout">logout(req, res)</a></dt>
 <dd></dd>
-<dt><a href="#requireRole">requireRole(roles)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
+<dt><a href="#requireRole">requireRole(roles)</a> ⇒ <code>Middleware</code></dt>
 <dd></dd>
 </dl>
 
@@ -43,8 +43,8 @@ Setup OIDC with express
 **Api**: public  
 **Todo**
 
-- [ ] Checks of params
 - [ ] Secure cookie?
+- [ ] failureRedirect, how should this work?
 
 
 | Param | Type | Default | Description |
@@ -61,7 +61,7 @@ Setup OIDC with express
 | [config.appCallbackSilentLoginUrl] | <code>string</code> |  | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
 | [config.callbackLogoutUrl] | <code>string</code> |  | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/silent/callback |
 | [config.appCallbackLogoutUrl] | <code>string</code> |  | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
-| config.defaultRedirect | <code>string</code> |  | Optional Fallback if no next url is supplied to login |
+| config.defaultRedirect | <code>string</code> |  | Fallback if no next url is supplied to login |
 | config.failureRedirect | <code>string</code> |  | In case of error |
 | [config.anonymousCookieMaxAge] | <code>string</code> | <code>600000</code> | Optional If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds). |
 | [config.extendUser] | <code>function</code> |  | Optional Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => { user.isAwesome = true } |
@@ -132,10 +132,10 @@ oidc.login
 ```
 <a name="requireRole"></a>
 
-## requireRole(roles) ⇒ <code>Promise.&lt;Middleware&gt;</code>
+## requireRole(roles) ⇒ <code>Middleware</code>
 **Kind**: global function  
 **Summary**: Express Middleware that checks if the req.user has this/these roles.  
-**Returns**: <code>Promise.&lt;Middleware&gt;</code> - Promise which resolves to a Express middleware
+**Returns**: <code>Middleware</code> - Promise which resolves to a Express middleware
 
 A role is a property found on the user object and has most
 likely been added through the internal createUser function. @see {constructor}  
