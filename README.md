@@ -55,7 +55,7 @@ Use this middleware to check if the user is logged into the OpenID Connect serve
 
 If the user is logged in a user object can be found in req.user.
 
-If not, the req.user will be undefined
+If not, the user is anonymous and the req.user will be undefined. The silent login will occur again after `anonymousCookieMaxAge` expires.
 
 ### **logout**
 
