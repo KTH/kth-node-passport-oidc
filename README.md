@@ -37,34 +37,27 @@ appRoute.get("node.index", _addProxy("/"), oidc.login, Sample.getIndex);
 
 ### Parameters
 
-| Param                            | Type                  | Default             | Description                                                                                                                                 |
-| -------------------------------- | --------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| expressApp                       | <code>Object</code>   |                     | The express app instance                                                                                                                    |
-| passport                         | <code>Object</code>   |                     | The passport instance                                                                                                                       |
-| config                           | <code>Object</code>   |                     | Configuration object                                                                                                                        |
-| config.configurationUrl          | <code>String</code>   |                     | Url to OpenID Connect server Example: https://myOpenIDServer.com/adfs/.well-known/openid-configuration                                      |
-| config.clientId                  | <code>String</code>   |                     | This apps clientID                                                                                                                          |
-| config.clientSecret              | <code>String</code>   |                     | This apps client secret                                                                                                                     |
-| config.callbackLoginUrl          | <code>String</code>   |                     | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback                         |
-| config.appCallbackLoginUrl       | <code>String</code>   |                     | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback         |
-| config.callbackSilentLoginUrl    | <code>String</code>   |                     | This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback                          |
-| config.appCallbackSilentLoginUrl | <code>String</code>   |                     | The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
-| config.callbackLogoutUrl         | <code>String</code>   |                     | This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/silent/callback                                |
-| config.appCallbackLogoutUrl      | <code>String</code>   |                     | The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
-| config.defaultRedirect           | <code>String</code>   |                     | Fallback if no next url is supplied to login                                                                                                |
-| config.failureRedirect           | <code>String</code>   |                     | In case of error                                                                                                                            |
-| [config.anonymousCookieMaxAge]   | <code>String</code>   | <code>600000</code> | If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds).                                     |
-| config.extendUser                | <code>function</code> |                     | Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => { user.isAwesome = true }  |
+| Param                              | Type                  | Default             | Description                                                                                                                                          |
+| ---------------------------------- | --------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| expressApp                         | <code>Object</code>   |                     | The express app instance                                                                                                                             |
+| passport                           | <code>Object</code>   |                     | The passport instance                                                                                                                                |
+| config                             | <code>Object</code>   |                     | Configuration object                                                                                                                                 |
+| config.configurationUrl            | <code>string</code>   |                     | Url to OpenID Connect server Example: https://myOpenIDServer.com/adfs/.well-known/openid-configuration                                               |
+| config.clientId                    | <code>string</code>   |                     | This apps clientID                                                                                                                                   |
+| config.clientSecret                | <code>string</code>   |                     | This apps client secret                                                                                                                              |
+| config.callbackLoginUrl            | <code>string</code>   |                     | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback                                  |
+| config.appCallbackLoginUrl         | <code>string</code>   |                     | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback                  |
+| [config.callbackSilentLoginUrl]    | <code>string</code>   |                     | This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback                                   |
+| [config.appCallbackSilentLoginUrl] | <code>string</code>   |                     | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
+| [config.callbackLogoutUrl]         | <code>string</code>   |                     | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/silent/callback                                |
+| [config.appCallbackLogoutUrl]      | <code>string</code>   |                     | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
+| config.defaultRedirect             | <code>string</code>   |                     | Optional Fallback if no next url is supplied to login                                                                                                |
+| config.failureRedirect             | <code>string</code>   |                     | In case of error                                                                                                                                     |
+| [config.anonymousCookieMaxAge]     | <code>string</code>   | <code>600000</code> | Optional If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds).                                     |
+| [config.extendUser]                | <code>function</code> |                     | Optional Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => { user.isAwesome = true }  |
 
 ### Properties on the created OIDC
 
-<a name="loginStrategy"></a>
-
-## loginStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy  
 <a name="login"></a>
 
 ## login(req, res, next) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -86,13 +79,6 @@ for authentication
 oidc.login;
 ```
 
-<a name="loginSilentStrategy"></a>
-
-## loginSilentStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy configured for silent authentication  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy for silent authentication  
 <a name="silentLogin"></a>
 
 ## silentLogin(req, res, next) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -133,6 +119,22 @@ for authentication
 oidc.login;
 ```
 
+<a name="loginStrategy"></a>
+
+## loginStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
+
+**Kind**: global function  
+**Summary**: Creates a openid-client Strategy  
+**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy
+
+<a name="loginSilentStrategy"></a>
+
+## loginSilentStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
+
+**Kind**: global function  
+**Summary**: Creates a openid-client Strategy configured for silent authentication  
+**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy for silent authentication
+
 <a name="requireRole"></a>
 
 ## requireRole(roles) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -154,8 +156,6 @@ likely been added through the internal createUser function. @see {constructor}
 ```js
 requireRole("isAdmin", "isEditor");
 ```
-
-## Oidc
 
 ## Run tests
 
