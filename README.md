@@ -124,7 +124,7 @@ oidc.logout;
 
 **Kind**: global function  
 **Summary**: Express Middleware that checks if the req.user has this/these roles.  
-**Returns**: <code>Middleware</code> - Promise which resolves to a Express middleware
+**Returns**: <code>Middleware</code> - A Express middleware
 
 A role is a property found on the user object and has most
 likely been added through the optional extendUser function parameter. @see {config.extendUser}
