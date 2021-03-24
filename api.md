@@ -16,15 +16,11 @@
 ## Functions
 
 <dl>
-<dt><a href="#loginStrategy">loginStrategy()</a> ⇒ <code>Promise.&lt;Strategy&gt;</code></dt>
-<dd></dd>
 <dt><a href="#login">login(req, res, next)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
-<dd></dd>
-<dt><a href="#loginSilentStrategy">loginSilentStrategy()</a> ⇒ <code>Promise.&lt;Strategy&gt;</code></dt>
 <dd></dd>
 <dt><a href="#silentLogin">silentLogin(req, res, next)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
 <dd></dd>
-<dt><a href="#logout">logout(req, res)</a></dt>
+<dt><a href="#logout">logout(req, res)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
 <dd></dd>
 <dt><a href="#requireRole">requireRole(roles)</a> ⇒ <code>Middleware</code></dt>
 <dd></dd>
@@ -57,7 +53,7 @@ Setup OIDC with express
 | config.clientSecret | <code>string</code> |  | This apps client secret |
 | config.callbackLoginUrl | <code>string</code> |  | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback |
 | config.appCallbackLoginUrl | <code>string</code> |  | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback |
-| [config.callbackSilentLoginUrl] | <code>string</code> |  | This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback |
+| [config.callbackSilentLoginUrl] | <code>string</code> |  | Optional This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback |
 | [config.appCallbackSilentLoginUrl] | <code>string</code> |  | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
 | [config.callbackLogoutUrl] | <code>string</code> |  | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/silent/callback |
 | [config.appCallbackLogoutUrl] | <code>string</code> |  | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
@@ -66,12 +62,6 @@ Setup OIDC with express
 | [config.anonymousCookieMaxAge] | <code>string</code> | <code>600000</code> | Optional If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds). |
 | [config.extendUser] | <code>function</code> |  | Optional Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => { user.isAwesome = true } |
 
-<a name="loginStrategy"></a>
-
-## loginStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy  
 <a name="login"></a>
 
 ## login(req, res, next) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -90,12 +80,6 @@ for authentication
 ```js
 oidc.login
 ```
-<a name="loginSilentStrategy"></a>
-
-## loginSilentStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy configured for silent authentication  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy for silent authentication  
 <a name="silentLogin"></a>
 
 ## silentLogin(req, res, next) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -116,10 +100,9 @@ oidc.silentLogin
 ```
 <a name="logout"></a>
 
-## logout(req, res)
+## logout(req, res) ⇒ <code>Promise.&lt;Middleware&gt;</code>
 **Kind**: global function  
-**Summary**: Check if the user it authenticated or else redirect to OpenID Connect server
-for authentication  
+**Returns**: <code>Promise.&lt;Middleware&gt;</code> - A promise which resolves to a middleware which logs the current user  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -128,7 +111,7 @@ for authentication
 
 **Example**  
 ```js
-oidc.login
+oidc.logout
 ```
 <a name="requireRole"></a>
 

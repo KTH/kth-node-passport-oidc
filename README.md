@@ -47,7 +47,7 @@ appRoute.get("node.index", _addProxy("/"), oidc.login, Sample.getIndex);
 | config.clientSecret                | <code>string</code>   |                     | This apps client secret                                                                                                                              |
 | config.callbackLoginUrl            | <code>string</code>   |                     | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback                                  |
 | config.appCallbackLoginUrl         | <code>string</code>   |                     | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback                  |
-| [config.callbackSilentLoginUrl]    | <code>string</code>   |                     | This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback                                   |
+| [config.callbackSilentLoginUrl]    | <code>string</code>   |                     | Optional This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback                          |
 | [config.appCallbackSilentLoginUrl] | <code>string</code>   |                     | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
 | [config.callbackLogoutUrl]         | <code>string</code>   |                     | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/silent/callback                                |
 | [config.appCallbackLogoutUrl]      | <code>string</code>   |                     | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
@@ -102,11 +102,10 @@ oidc.silentLogin;
 
 <a name="logout"></a>
 
-## logout(req, res)
+## logout(req, res) ⇒ <code>Promise.&lt;Middleware&gt;</code>
 
 **Kind**: global function  
-**Summary**: Check if the user it authenticated or else redirect to OpenID Connect server
-for authentication
+**Returns**: <code>Promise.&lt;Middleware&gt;</code> - A promise which resolves to a middleware which logs the current user
 
 | Param | Type                | Description             |
 | ----- | ------------------- | ----------------------- |
@@ -116,32 +115,16 @@ for authentication
 **Example**
 
 ```js
-oidc.login;
+oidc.logout;
 ```
-
-<a name="loginStrategy"></a>
-
-## loginStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy
-
-<a name="loginSilentStrategy"></a>
-
-## loginSilentStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy configured for silent authentication  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy for silent authentication
 
 <a name="requireRole"></a>
 
-## requireRole(roles) ⇒ <code>Promise.&lt;Middleware&gt;</code>
+## requireRole(roles) ⇒ <code>Middleware</code>
 
 **Kind**: global function  
 **Summary**: Express Middleware that checks if the req.user has this/these roles.  
-**Returns**: <code>Promise.&lt;Middleware&gt;</code> - Promise which resolves to a Express middleware
+**Returns**: <code>Middleware</code> - Promise which resolves to a Express middleware
 
 A role is a property found on the user object and has most
 likely been added through the internal createUser function. @see {constructor}  
@@ -154,7 +137,7 @@ likely been added through the internal createUser function. @see {constructor}
 **Example**
 
 ```js
-requireRole("isAdmin", "isEditor");
+oidc.requireRole("isAdmin", "isEditor");
 ```
 
 ## Run tests
