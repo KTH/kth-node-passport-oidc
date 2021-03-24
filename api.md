@@ -16,13 +16,15 @@
 ## Functions
 
 <dl>
+<dt><a href="#loginStrategy">loginStrategy()</a> ⇒ <code>Promise.&lt;Strategy&gt;</code></dt>
+<dd></dd>
 <dt><a href="#login">login(req, res, next)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
+<dd></dd>
+<dt><a href="#loginSilentStrategy">loginSilentStrategy()</a> ⇒ <code>Promise.&lt;Strategy&gt;</code></dt>
 <dd></dd>
 <dt><a href="#silentLogin">silentLogin(req, res, next)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
 <dd></dd>
-<dt><a href="#loginStrategy">loginStrategy()</a> ⇒ <code>Promise.&lt;Strategy&gt;</code></dt>
-<dd></dd>
-<dt><a href="#loginSilentStrategy">loginSilentStrategy()</a> ⇒ <code>Promise.&lt;Strategy&gt;</code></dt>
+<dt><a href="#logout">logout(req, res)</a></dt>
 <dd></dd>
 <dt><a href="#requireRole">requireRole(roles)</a> ⇒ <code>Promise.&lt;Middleware&gt;</code></dt>
 <dd></dd>
@@ -41,26 +43,35 @@ Setup OIDC with express
 **Api**: public  
 **Todo**
 
+- [ ] Checks of params
 - [ ] Secure cookie?
 
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | expressApp | <code>Object</code> |  | The express app instance |
-| config | <code>Object</code> |  |  |
-| config.configurationUrl | <code>String</code> |  |  |
-| config.clientId | <code>String</code> |  |  |
-| config.clientSecret | <code>String</code> |  |  |
-| config.callbackUrl | <code>String</code> |  |  |
-| config.appCallbackUrl | <code>String</code> |  | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/callback |
-| config.callbackSilentUrl | <code>String</code> |  |  |
-| config.appCallbackSilentUrl | <code>String</code> |  | The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
-| config.logoutUrl | <code>String</code> |  |  |
+| passport | <code>Object</code> |  | The passport instance |
+| config | <code>Object</code> |  | Configuration object |
+| config.configurationUrl | <code>String</code> |  | Url to OpenID Connect server Example: https://myOpenIDServer.com/adfs/.well-known/openid-configuration |
+| config.clientId | <code>String</code> |  | This apps clientID |
+| config.clientSecret | <code>String</code> |  | This apps client secret |
+| config.callbackLoginUrl | <code>String</code> |  | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback |
+| config.appCallbackLoginUrl | <code>String</code> |  | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback |
+| config.callbackSilentLoginUrl | <code>String</code> |  | This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback |
+| config.appCallbackSilentLoginUrl | <code>String</code> |  | The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
+| config.callbackLogoutUrl | <code>String</code> |  | This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/silent/callback |
+| config.appCallbackLogoutUrl | <code>String</code> |  | The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
 | config.defaultRedirect | <code>String</code> |  | Fallback if no next url is supplied to login |
 | config.failureRedirect | <code>String</code> |  | In case of error |
 | [config.anonymousCookieMaxAge] | <code>String</code> | <code>600000</code> | If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds). |
-| config.extendUser | <code>function</code> |  | Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => {} |
+| config.extendUser | <code>function</code> |  | Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => { user.isAwesome = true } |
 
+<a name="loginStrategy"></a>
+
+## loginStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
+**Kind**: global function  
+**Summary**: Creates a openid-client Strategy  
+**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy  
 <a name="login"></a>
 
 ## login(req, res, next) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -79,6 +90,12 @@ for authentication
 ```js
 oidc.login
 ```
+<a name="loginSilentStrategy"></a>
+
+## loginSilentStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
+**Kind**: global function  
+**Summary**: Creates a openid-client Strategy configured for silent authentication  
+**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy for silent authentication  
 <a name="silentLogin"></a>
 
 ## silentLogin(req, res, next) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -97,18 +114,22 @@ for authentication
 ```js
 oidc.silentLogin
 ```
-<a name="loginStrategy"></a>
+<a name="logout"></a>
 
-## loginStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
+## logout(req, res)
 **Kind**: global function  
-**Summary**: Creates a openid-client Strategy  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy  
-<a name="loginSilentStrategy"></a>
+**Summary**: Check if the user it authenticated or else redirect to OpenID Connect server
+for authentication  
 
-## loginSilentStrategy() ⇒ <code>Promise.&lt;Strategy&gt;</code>
-**Kind**: global function  
-**Summary**: Creates a openid-client Strategy configured for silent authentication  
-**Returns**: <code>Promise.&lt;Strategy&gt;</code> - A promise which resolves to a openid-client configured strategy for silent authentication  
+| Param | Type | Description |
+| --- | --- | --- |
+| req | <code>Object</code> | Express request object |
+| res | <code>Object</code> | Express response object |
+
+**Example**  
+```js
+oidc.login
+```
 <a name="requireRole"></a>
 
 ## requireRole(roles) ⇒ <code>Promise.&lt;Middleware&gt;</code>
@@ -117,7 +138,7 @@ oidc.silentLogin
 **Returns**: <code>Promise.&lt;Middleware&gt;</code> - Promise which resolves to a Express middleware
 
 A role is a property found on the user object and has most
-likely been added through the internal createUser function.  
+likely been added through the internal createUser function. @see {constructor}  
 **Api**: public  
 
 | Param | Type | Description |
