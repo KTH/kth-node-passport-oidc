@@ -127,7 +127,7 @@ oidc.logout;
 **Returns**: <code>Middleware</code> - Promise which resolves to a Express middleware
 
 A role is a property found on the user object and has most
-likely been added through the internal createUser function. @see {constructor}  
+likely been added through the optional extendUser function parameter. @see {config.extendUser}
 **Api**: public
 
 | Param | Type                              | Description                                                        |
