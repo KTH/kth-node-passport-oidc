@@ -8,7 +8,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:notify": "jest --watch --notify",
-    "build": "npm install && npm test"
+    "build": "npm install && npm test",
+    "buildApiDocs": " ./node_modules/jsdoc-to-markdown/bin/cli.js ./lib/oidc.js > api.md"
   },
   "repository": {
     "type": "git",
