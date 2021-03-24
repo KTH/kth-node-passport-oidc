@@ -35,11 +35,11 @@ appRoute.get(
 appRoute.get("node.index", _addProxy("/"), oidc.login, Sample.getIndex);
 ```
 
-### The basics
+## The basics
 
 There are three basic OIDC functions
 
-#### **login**
+### **login**
 
 A normal login. Use this middleware to force the user to login into the OpenID Connect server.
 
@@ -47,7 +47,7 @@ After a successful login a user object can be found in req.user.
 
 If not, the user may not visit the route
 
-#### **silentLogin**
+### **silentLogin**
 
 A silent login. Basically the user is allowed to be anonymous.
 
@@ -57,7 +57,7 @@ If the user is logged in a user object can be found in req.user.
 
 If not, the req.user will be undefined
 
-#### **logout**
+### **logout**
 
 Logs out the user from both the OpenID Connect server and this app.
 
