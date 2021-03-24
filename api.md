@@ -102,7 +102,8 @@ oidc.silentLogin
 
 ## logout(req, res) ⇒ <code>Promise.&lt;Middleware&gt;</code>
 **Kind**: global function  
-**Returns**: <code>Promise.&lt;Middleware&gt;</code> - A promise which resolves to a middleware which logs the current user  
+**Summary**: Express Middleware that logs out the user from both the OpenID Connect server and this app. Note: The user is redirected to the config.defaultRedirect after a successful logout.  
+**Returns**: <code>Promise.&lt;Middleware&gt;</code> - A promise which resolves to a middleware which logs out the current user  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -118,10 +119,10 @@ oidc.logout
 ## requireRole(roles) ⇒ <code>Middleware</code>
 **Kind**: global function  
 **Summary**: Express Middleware that checks if the req.user has this/these roles.  
-**Returns**: <code>Middleware</code> - Promise which resolves to a Express middleware
+**Returns**: <code>Middleware</code> - A Express middleware
 
 A role is a property found on the user object and has most
-likely been added through the internal createUser function. @see {constructor}  
+likely been added through the optional extendUser function parameter. @see {config.extendUser}  
 **Api**: public  
 
 | Param | Type | Description |
@@ -130,5 +131,5 @@ likely been added through the internal createUser function. @see {constructor}
 
 **Example**  
 ```js
-requireRole('isAdmin', 'isEditor')
+oidc.requireRole('isAdmin', 'isEditor')
 ```
