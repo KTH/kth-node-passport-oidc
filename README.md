@@ -180,3 +180,7 @@ likely been added through the optional extendUser function parameter. @see {conf
 ```js
 oidc.requireRole("isAdmin", "isEditor");
 ```
+
+## Development
+
+Describe the api generation
