@@ -8,42 +8,6 @@ Supports login and Silent login.
 
 ## Quick start
 
-### Quick tech summary
-
-There are three basic OIDC functions
-
-#### **login**
-
-A normal login. Use this middleware to force the user to login into the OpenID Connect server.
-
-After a successful login a user object can be found in req.user.
-
-If not, the user may not the route
-
-#### **silentLogin**
-
-A silent login. Basically the user is allowed to anonymous.
-
-Use this middleware to check if the user is logged into the OpenID Connect server.
-
-If the user is logged in a user object can be found in req.user.
-
-If not, the req.user will be undefined
-
-#### **logout**
-
-Logs out the user from both the OpenID Connect server and this app.
-
----
-
-Configuration for each OIDC function comes in pairs. A pair consist of the same URL in two different formats.
-
-One that is configured directly into the OpenID Connect client and the other is used to set up the URL in our app through a Express route.
-
-These URLs are used by the OpenID Connect server to communicate with our att during authentication.
-
-> Note: Only the login configuration is required
-
 ### Used with node-web template
 
 ```js
@@ -70,6 +34,46 @@ appRoute.get(
 );
 appRoute.get("node.index", _addProxy("/"), oidc.login, Sample.getIndex);
 ```
+
+### The basics
+
+There are three basic OIDC functions
+
+#### **login**
+
+A normal login. Use this middleware to force the user to login into the OpenID Connect server.
+
+After a successful login a user object can be found in req.user.
+
+If not, the user may not visit the route
+
+#### **silentLogin**
+
+A silent login. Basically the user is allowed to be anonymous.
+
+Use this middleware to check if the user is logged into the OpenID Connect server.
+
+If the user is logged in a user object can be found in req.user.
+
+If not, the req.user will be undefined
+
+#### **logout**
+
+Logs out the user from both the OpenID Connect server and this app.
+
+---
+
+Configuration for each OIDC function comes in pairs. A pair consist of the same URL in two different formats.
+
+One that is configured directly into the OpenID Connect client and the other is used to set up the URL in our app through a Express route.
+
+These URLs are used by the OpenID Connect server to communicate with our app during authentication.
+
+> Note: Only the login configuration is required
+
+TODO Beskriv req.user
+
+Beskriv extendUser
 
 ### Parameters
 
