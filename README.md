@@ -10,13 +10,9 @@ Supports login and Silent login.
 
 1.  Clone the repo
     ```bash
-    $ git clone git@github.com:KTH/kth-node-passport-oidc.git
+    $ npm install @KTH/kth-node-passport-oidc.git
     ```
-2.  Install dependencies
-    ```bash
-    $ npm install
-    ```
-3.  Use it
+2.  Use it
 
 #### With node-web template
 
