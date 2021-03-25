@@ -8,7 +8,17 @@ Supports login and Silent login.
 
 ## Quick start
 
-### Used with node-web template
+1.  Clone the repo
+    ```bash
+    $ git clone git@github.com:KTH/kth-node-passport-oidc.git
+    ```
+2.  Install dependencies
+    ```bash
+    $ npm install
+    ```
+3.  Use it
+
+#### With node-web template
 
 ```js
 const { OpenIDConnect, hasGroup } = require("@kth/kth-node-passport-oidc");
