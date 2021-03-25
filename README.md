@@ -26,7 +26,7 @@ const oidc = new OpenIDConnect(server, passport, {
   appCallbackSilentLoginUrl: _addProxy("/auth/silent/callback"),
   defaultRedirect: _addProxy(""),
   failureRedirect: _addProxy(""),
-  extendUser: (user) => {
+  extendUser: (user, claims) => {
     user.isAdmin = hasGroup(config.auth.adminGroup, user);
   },
 });
@@ -67,7 +67,7 @@ If not, the user is anonymous and the req.user will be undefined. The silent log
 
 Logs out the user from both the OpenID Connect server and this app.
 
----
+## Configuration
 
 Configuration for each OIDC function comes in pairs. A pair consist of the same URL in two different formats.
 
@@ -75,11 +75,30 @@ One that is configured directly into the OpenID Connect client and the other is 
 
 These URLs are used by the OpenID Connect server to communicate with our app during authentication.
 
-> Note: Only the login configuration is required
+> Note: Only the login configuration is required but you will most likely want at least also the logout
 
-TODO Beskriv req.user
+## req.user
 
-Beskriv extendUser
+On a successful login passport will add a user object on the request object. By default this object will have the following properties:
+
+| Property    | Type   | Example                               | Description                   |
+| ----------- | ------ | ------------------------------------- | ----------------------------- |
+| username    | string | pontusn                               | KTH Username                  |
+| displayName | string | Pontus Nydensten                      | Users full name               |
+| email       | string | pontusn@kth.se                        | KTH email address             |
+| memberOf    | array  | ['app.myApp.user', 'app.myApp.admin'] | Groups connected to this user |
+
+If you would like to add properties to the user object you can do this by adding a function called `extendUser` when instantiating OpenIDConnect.
+
+The function makes changes directly to the user object and must have this signature:
+
+```js
+(user, claims) => {
+  user.isAwesome = true;
+};
+```
+
+> The claims argument is the full response from the OpenID Connect server
 
 ### Parameters
 
@@ -189,4 +208,23 @@ oidc.requireRole("isAdmin", "isEditor");
 
 ## Development
 
-Describe the api generation
+1.  Clone the repo
+    ```bash
+    $ npm clone git@github.com:KTH/kth-node-passport-oidc.git
+    ```
+2.  Install dependencies
+    ```bash
+    $ npm install
+    ```
+
+### Generate API documentation
+
+This project includes a simple generation of Markdown documentation from the JS-doc in our code.
+
+To run this:
+
+```bash
+$ npm run buildApiDocs
+```
+
+Now you have a `api.md` file in the root of the project. Use this to update the main `README.md`
