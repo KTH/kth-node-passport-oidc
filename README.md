@@ -8,13 +8,9 @@ Supports login and Silent login.
 
 ## Quick start
 
-1.  Clone the repo
-    ```bash
-    $ npm install @KTH/kth-node-passport-oidc.git
-    ```
-2.  Use it
-
-#### With node-web template
+```bash
+$ npm install @KTH/kth-node-passport-oidc.git
+```
 
 ```js
 const { OpenIDConnect, hasGroup } = require("@kth/kth-node-passport-oidc");
@@ -208,14 +204,14 @@ oidc.requireRole("isAdmin", "isEditor");
 
 ## Development
 
-1.  Clone the repo
-    ```bash
-    $ npm clone git@github.com:KTH/kth-node-passport-oidc.git
-    ```
-2.  Install dependencies
-    ```bash
-    $ npm install
-    ```
+1. Clone the repo
+   ```bash
+   $ npm clone git@github.com:KTH/kth-node-passport-oidc.git
+   ```
+2. Install dependencies
+   ```bash
+   $ npm install
+   ```
 
 ### Generate API documentation
 
