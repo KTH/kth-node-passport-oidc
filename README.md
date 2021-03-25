@@ -75,9 +75,9 @@ On a successful login passport will add a user object on the request object. By 
 
 | Property    | Type   | Example                               | Description                   |
 | ----------- | ------ | ------------------------------------- | ----------------------------- |
-| username    | string | pontusn                               | KTH Username                  |
-| displayName | string | Pontus Nydensten                      | Users full name               |
-| email       | string | pontusn@kth.se                        | KTH email address             |
+| username    | string | johnd                                 | KTH Username                  |
+| displayName | string | John Doe                              | Users full name               |
+| email       | string |                                       | KTH email address             |
 | memberOf    | array  | ['app.myApp.user', 'app.myApp.admin'] | Groups connected to this user |
 
 If you would like to add properties to the user object you can do this by adding a function called `extendUser` when instantiating OpenIDConnect.
