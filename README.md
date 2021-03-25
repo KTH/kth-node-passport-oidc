@@ -1,10 +1,6 @@
 # KTH Node Passport OpenID Connect
 
-NPM: https://www.npmjs.com/package/@kth/kth-node-passport-oidc
-
 Simple and configurable package for OpenID Connect authentication. Based on [node-openid-client](https://github.com/panva/node-openid-client) and gives you Express middleware based on Passport.
-
-Supports login and Silent login.
 
 ## Quick start
 
