@@ -30,11 +30,17 @@
   },
   "homepage": "https://github.com/KTH/npm-template#readme",
   "devDependencies": {
-    "jsdoc-to-markdown": "^7.0.0",
-    "passport": "^0.4.1",
+    "@kth/eslint-config-kth": "^1.0.10",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.22.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
-    "jest-extended": "^0.11.5"
+    "jest-extended": "^0.11.5",
+    "jsdoc-to-markdown": "^7.0.0",
+    "passport": "^0.4.1",
+    "prettier": "^2.2.1"
   },
   "dependencies": {
     "openid-client": "^4.5.1"
