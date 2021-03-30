@@ -73,12 +73,12 @@ These URLs are used by the OpenID Connect server to communicate with our app dur
 
 On a successful login passport will add a user object on the request object. By default this object will have the following properties:
 
-| Property    | Type   | Example                               | Description                   |
-| ----------- | ------ | ------------------------------------- | ----------------------------- |
-| username    | string | johnd                                 | KTH Username                  |
-| displayName | string | John Doe                              | Users full name               |
-| email       | string |                                       | KTH email address             |
-| memberOf    | array  | ['app.myApp.user', 'app.myApp.admin'] | Groups connected to this user |
+| Property    | Type   | Example                               | Description                                                            |
+| ----------- | ------ | ------------------------------------- | ---------------------------------------------------------------------- |
+| username    | string | johnd                                 | KTH Username                                                           |
+| displayName | string | John Doe                              | Users full name                                                        |
+| email       | string |                                       | KTH email address. This requires higher security clearance             |
+| memberOf    | array  | ['app.myApp.user', 'app.myApp.admin'] | Groups connected to this user. This requires higher security clearance |
 
 If you would like to add properties to the user object you can do this by adding a function called `extendUser` when instantiating OpenIDConnect.
 
