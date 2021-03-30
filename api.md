@@ -40,7 +40,6 @@ Setup OIDC with express
 **Todo**
 
 - [ ] Secure cookie?
-- [ ] failureRedirect, how should this work?
 
 
 | Param | Type | Default | Description |
@@ -51,16 +50,16 @@ Setup OIDC with express
 | config.configurationUrl | <code>string</code> |  | Url to OpenID Connect server Example: https://myOpenIDServer.com/adfs/.well-known/openid-configuration |
 | config.clientId | <code>string</code> |  | This apps clientID |
 | config.clientSecret | <code>string</code> |  | This apps client secret |
+| config.tokenSecret | <code>string</code> |  | This apps token secret, used for encrypting token for session storage |
 | config.callbackLoginUrl | <code>string</code> |  | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback |
-| config.appCallbackLoginUrl | <code>string</code> |  | The callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback |
+| config.callbackLoginRoute | <code>string</code> |  | The callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback |
 | [config.callbackSilentLoginUrl] | <code>string</code> |  | Optional This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback |
-| [config.appCallbackSilentLoginUrl] | <code>string</code> |  | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
+| [config.callbackSilentLoginRoute] | <code>string</code> |  | Optional The silent callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback |
 | [config.callbackLogoutUrl] | <code>string</code> |  | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/logout/callback |
-| [config.appCallbackLogoutUrl] | <code>string</code> |  | Optional The silent callback URL used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
-| config.defaultRedirect | <code>string</code> |  | Fallback if no next url is supplied to login |
-| config.failureRedirect | <code>string</code> |  | In case of error |
+| [config.callbackLogoutRoute] | <code>string</code> |  | Optional The logout callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback |
+| config.defaultRedirect | <code>string</code> |  | Fallback if no next url is supplied to login or on logout |
 | [config.anonymousCookieMaxAge] | <code>string</code> | <code>600000</code> | Optional If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds). |
-| [config.extendUser] | <code>function</code> |  | Optional Function which gives you the possibility to add custom properties to the user object. Example: (user, claims) => { user.isAwesome = true } |
+| [config.extendUser] | <code>function</code> |  | Optional Function which gives you the possibility to add custom properties to the user object. The supplied function can be a async. Example: (user, claims) => { user.isAwesome = true } or async (user, claims) => { // do a api call } |
 
 <a name="login"></a>
 
