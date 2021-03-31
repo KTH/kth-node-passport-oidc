@@ -17,7 +17,6 @@ const oidc = new OpenIDConnect(server, passport, {
   appCallbackLogoutUrl: _addProxy("/auth/logout/callback"),
   appCallbackSilentLoginUrl: _addProxy("/auth/silent/callback"),
   defaultRedirect: _addProxy(""),
-  failureRedirect: _addProxy(""),
   extendUser: (user, claims) => {
     user.isAdmin = hasGroup(config.auth.adminGroup, user);
   },
