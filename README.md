@@ -79,7 +79,7 @@ On a successful login passport will add a user object on the request object. By 
 | email       | string |                                       | KTH email address. This requires higher security clearance             |
 | memberOf    | array  | ['app.myApp.user', 'app.myApp.admin'] | Groups connected to this user. This requires higher security clearance |
 
-If you would like to add properties to the user object you can do this by adding a function called `extendUser` when instantiating OpenIDConnect.
+If you would like to add properties to the user object you can do this by adding a function called `extendUser` when instantiating OpenIDConnect. The function can also be async.
 
 The function makes changes directly to the user object and must have this signature:
 
