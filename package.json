@@ -35,15 +35,24 @@
     "eslint": "^7.22.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "husky": "^6.0.0",
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
     "jest-extended": "^0.11.5",
     "jsdoc-to-markdown": "^7.0.0",
     "passport": "^0.4.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0"
   },
   "dependencies": {
     "openid-client": "^4.5.1"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "printWidth": 120,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
   },
   "// (jest)": "configuration version 2021-06-15 (WEB) - might also reside as module.exports in jest.config.js",
   "jest": {
