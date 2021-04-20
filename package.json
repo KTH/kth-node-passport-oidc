@@ -39,13 +39,13 @@
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
     "jest-extended": "^0.11.5",
-    "jsdoc-to-markdown": "^7.0.0",
+    "jsdoc-to-markdown": "^7.0.1",
     "passport": "^0.4.1",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0"
   },
   "dependencies": {
-    "openid-client": "^4.5.1"
+    "openid-client": "^4.6.0"
   },
   "prettier": {
     "arrowParens": "avoid",
