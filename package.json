@@ -9,7 +9,8 @@
     "test:watch": "jest --watch",
     "test:notify": "jest --watch --notify",
     "build": "npm install && npm test",
-    "buildApiDocs": " ./node_modules/jsdoc-to-markdown/bin/cli.js ./lib/oidc.js > api.md"
+    "buildApiDocs": " ./node_modules/jsdoc-to-markdown/bin/cli.js ./lib/oidc.js > api.md",
+    "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
   },
   "repository": {
     "type": "git",
@@ -31,8 +32,8 @@
   "homepage": "https://github.com/KTH/npm-template#readme",
   "devDependencies": {
     "@kth/eslint-config-kth": "^1.0.10",
-    "dotenv": "^8.2.0",
-    "eslint": "^7.22.0",
+    "dotenv": "^9.0.0",
+    "eslint": "^7.25.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "husky": "^6.0.0",
@@ -45,7 +46,7 @@
     "pretty-quick": "^3.1.0"
   },
   "dependencies": {
-    "openid-client": "^4.6.0"
+    "openid-client": "^4.7.3"
   },
   "prettier": {
     "arrowParens": "avoid",
