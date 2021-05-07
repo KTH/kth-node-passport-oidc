@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KTH/npm-template.git"
+    "url": "git+https://github.com/KTH/kth-node-passport-cas.git"
   },
   "keywords": [
     "npm",
@@ -27,9 +27,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KTH/npm-template/issues"
+    "url": "https://github.com/KTH/kth-node-passport-cas/issues"
   },
-  "homepage": "https://github.com/KTH/npm-template#readme",
+  "homepage": "https://github.com/KTH/kth-node-passport-cas#readme",
   "devDependencies": {
     "@kth/eslint-config-kth": "^1.0.10",
     "dotenv": "^9.0.0",
