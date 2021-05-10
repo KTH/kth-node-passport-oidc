@@ -9,27 +9,22 @@ $ npm install @kth/kth-node-passport-oidc.git
 ```
 
 ```js
-const { OpenIDConnect, hasGroup } = require("@kth/kth-node-passport-oidc");
+const { OpenIDConnect, hasGroup } = require('@kth/kth-node-passport-oidc')
 
 const oidc = new OpenIDConnect(server, passport, {
   ...config.oidc,
-  appCallbackLoginUrl: _addProxy("/auth/login/callback"),
-  appCallbackLogoutUrl: _addProxy("/auth/logout/callback"),
-  appCallbackSilentLoginUrl: _addProxy("/auth/silent/callback"),
-  defaultRedirect: _addProxy(""),
+  appCallbackLoginUrl: _addProxy('/auth/login/callback'),
+  appCallbackLogoutUrl: _addProxy('/auth/logout/callback'),
+  appCallbackSilentLoginUrl: _addProxy('/auth/silent/callback'),
+  defaultRedirect: _addProxy(''),
   extendUser: (user, claims) => {
-    user.isAdmin = hasGroup(config.auth.adminGroup, user);
+    user.isAdmin = hasGroup(config.auth.adminGroup, user)
   },
-});
+})
 
 // And use the middleware with your routes
-appRoute.get(
-  "node.page",
-  _addProxy("/silent"),
-  oidc.silentLogin,
-  Sample.getIndex
-);
-appRoute.get("node.index", _addProxy("/"), oidc.login, Sample.getIndex);
+appRoute.get('node.page', _addProxy('/silent'), oidc.silentLogin, Sample.getIndex)
+appRoute.get('node.index', _addProxy('/'), oidc.login, Sample.getIndex)
 ```
 
 ## The basics
@@ -84,9 +79,9 @@ If you would like to add properties to the user object you can do this by adding
 The function makes changes directly to the user object and must have this signature:
 
 ```js
-(user, claims) => {
-  user.isAwesome = true;
-};
+;(user, claims) => {
+  user.isAwesome = true
+}
 ```
 
 > The claims argument is the full response from the OpenID Connect server
@@ -132,7 +127,7 @@ for authentication
 **Example**
 
 ```js
-oidc.login;
+oidc.login
 ```
 
 <a name="silentLogin"></a>
@@ -153,7 +148,7 @@ for authentication
 **Example**
 
 ```js
-oidc.silentLogin;
+oidc.silentLogin
 ```
 
 <a name="logout"></a>
@@ -172,7 +167,7 @@ oidc.silentLogin;
 **Example**
 
 ```js
-oidc.logout;
+oidc.logout
 ```
 
 <a name="requireRole"></a>
@@ -194,8 +189,20 @@ likely been added through the optional extendUser function parameter. @see {conf
 **Example**
 
 ```js
-oidc.requireRole("isAdmin", "isEditor");
+oidc.requireRole('isAdmin', 'isEditor')
 ```
+
+## Troubleshooting
+
+### I get a 403 Unauthorized when trying to login
+
+If you get this message after you logged into the ADFS server it might be that your applications local time differs from the one on the ADFS server.
+
+After you logged in, the client (browser) is trying to call the callback-route in your application.
+
+The reason for this is that the JWT information contains a timestamp. If the timestamp differs to much the JWT will be refused and you get a 403.
+
+Check your time settings. Are you synching with a time server? Try to change this to `ntp.kth.se`
 
 ## Development
 
