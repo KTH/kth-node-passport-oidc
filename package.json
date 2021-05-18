@@ -1,6 +1,6 @@
 {
   "name": "@kth/kth-node-passport-oidc",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "automaticPublish": "true",
   "description": "OpenId Connect Express middleware, strategy and utils",
   "main": "lib/index.js",
