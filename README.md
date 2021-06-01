@@ -192,6 +192,22 @@ likely been added through the optional extendUser function parameter. @see {conf
 oidc.requireRole('isAdmin', 'isEditor')
 ```
 
+## Versions and Migrating
+
+### v3
+
+NOT TO BE USED IN PRODUCTION FOR THE MOMENT!
+
+Changes how the data in the session is stored during login. Also adds the possibility to configure a logger which can be used to debug.
+
+### v2
+
+Changes how the data in the session is stored during login. Also adds the possibility to configure a logger which can be used to debug.
+
+### v1
+
+The original :-)
+
 ## Troubleshooting
 
 ### I get a 403 Unauthorized when trying to login
