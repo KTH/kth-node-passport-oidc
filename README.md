@@ -106,6 +106,7 @@ The function makes changes directly to the user object and must have this signat
 | config.defaultRedirect            | <code>string</code>   |                     | Fallback if no next url is supplied to login or on logout                                                                                                                                                                                 |
 | [config.anonymousCookieMaxAge]    | <code>string</code>   | <code>600000</code> | Optional If a client, on a silent login, is considered anonymous, this cookie lives this long (in milliseconds).                                                                                                                          |
 | [config.extendUser]               | <code>function</code> |                     | Optional Function which gives you the possibility to add custom properties to the user object. The supplied function can be a async. Example: (user, claims) => { user.isAwesome = true } or async (user, claims) => { // do a api call } |
+| [config.log]                      | <code>Object</code>   |                     | Optional Logger object which should have logging functions. Used for logging in this module. Example: logger.error('Error message')                                                                                                       |
 
 ### Properties on the created OIDC
 
@@ -193,6 +194,10 @@ oidc.requireRole('isAdmin', 'isEditor')
 ```
 
 ## Versions and Migrating
+
+### v4
+
+Now uses the toolbars cookie for deciding if the user should be silently logged in.
 
 ### v3
 
