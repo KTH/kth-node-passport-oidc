@@ -197,11 +197,11 @@ oidc.requireRole('isAdmin', 'isEditor')
 
 ### v4
 
+NOT TO BE USED IN PRODUCTION FOR THE MOMENT!
+
 Now uses the toolbars cookie for deciding if the user should be silently logged in.
 
 ### v3
-
-NOT TO BE USED IN PRODUCTION FOR THE MOMENT!
 
 Changes how the data in the session is stored during login. Also adds the possibility to configure a logger which can be used to debug.
 
