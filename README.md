@@ -20,6 +20,7 @@ const oidc = new OpenIDConnect(server, passport, {
   extendUser: (user, claims) => {
     user.isAdmin = hasGroup(config.auth.adminGroup, user)
   },
+  log,
 })
 
 // And use the middleware with your routes
