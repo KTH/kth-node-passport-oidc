@@ -89,27 +89,27 @@ The function makes changes directly to the user object and must have this signat
 
 ### Parameters
 
-| Param                                   | Type                  | Description                                                                                                                                                                                                                               |
-| --------------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| expressApp                              | <code>Object</code>   | The express app instance                                                                                                                                                                                                                  |
-| passport                                | <code>Object</code>   | The passport instance                                                                                                                                                                                                                     |
-| config                                  | <code>Object</code>   | Configuration object                                                                                                                                                                                                                      |
-| config.configurationUrl                 | <code>string</code>   | Url to OpenID Connect server Example: https://myOpenIDServer.com/adfs/.well-known/openid-configuration                                                                                                                                    |
-| config.clientId                         | <code>string</code>   | This apps clientID                                                                                                                                                                                                                        |
-| config.clientSecret                     | <code>string</code>   | This apps client secret                                                                                                                                                                                                                   |
-| config.tokenSecret                      | <code>string</code>   | This apps token secret, used for encrypting token for session storage                                                                                                                                                                     |
-| config.callbackLoginUrl                 | <code>string</code>   | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback                                                                                                                       |
-| config.callbackLoginRoute               | <code>string</code>   | The callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback                                                                                                     |
-| [config.callbackSilentLoginUrl]         | <code>string</code>   | Optional This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback                                                                                                               |
-| [config.callbackSilentLoginRoute]       | <code>string</code>   | Optional The silent callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback                                                                                    |
-| [config.callbackSilentLoginBounceRoute] | <code>string</code>   | Optional The silent callback bounce to handle multiple request. Example: /node/auth/silent/bounce                                                                                                                                         |
-| [config.callbackLogoutUrl]              | <code>string</code>   | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/logout/callback                                                                                                                     |
-| [config.callbackLogoutRoute]            | <code>string</code>   | Optional The logout callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback                                                                                    |
-| config.defaultRedirect                  | <code>string</code>   | Fallback if no next url is supplied to login or on logout                                                                                                                                                                                 |
-| [config.anonymousThreshold=2000]        | <code>number</code>   | Optional. Time in milliseconds before a anonymous session should try a login again?                                                                                                                                                       |
-| [config.extendUser]                     | <code>function</code> | Optional Function which gives you the possibility to add custom properties to the user object. The supplied function can be a async. Example: (user, claims) => { user.isAwesome = true } or async (user, claims) => { // do a api call } |
-| [config.log]                            | <code>Object</code>   | Optional Logger object which should have logging functions. Used for logging in this module. Example: logger.error('Error message')                                                                                                       |
-|                                         |
+| Param                             | Type                  | Description                                                                                                                                                                                                                               |
+| --------------------------------- | --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| expressApp                        | <code>Object</code>   | The express app instance                                                                                                                                                                                                                  |
+| passport                          | <code>Object</code>   | The passport instance                                                                                                                                                                                                                     |
+| config                            | <code>Object</code>   | Configuration object                                                                                                                                                                                                                      |
+| config.configurationUrl           | <code>string</code>   | Url to OpenID Connect server Example: https://myOpenIDServer.com/adfs/.well-known/openid-configuration                                                                                                                                    |
+| config.clientId                   | <code>string</code>   | This apps clientID                                                                                                                                                                                                                        |
+| config.clientSecret               | <code>string</code>   | This apps client secret                                                                                                                                                                                                                   |
+| config.tokenSecret                | <code>string</code>   | This apps token secret, used for encrypting token for session storage                                                                                                                                                                     |
+| config.callbackLoginUrl           | <code>string</code>   | This apps full URL to callback function for standard login. Example: http://localhost:3000/node/auth/login/callback                                                                                                                       |
+| config.callbackLoginRoute         | <code>string</code>   | The callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/login/callback                                                                                                     |
+| [config.callbackSilentLoginUrl]   | <code>string</code>   | Optional This apps full URL to callback function for silent login. Example: http://localhost:3000/node/auth/silent/callback                                                                                                               |
+| [config.callbackSilentLoginRoute] | <code>string</code>   | Optional The silent callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/silent/callback                                                                                    |
+|                                   |
+| [config.callbackLogoutUrl]        | <code>string</code>   | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/logout/callback                                                                                                                     |
+| [config.callbackLogoutRoute]      | <code>string</code>   | Optional The logout callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback                                                                                    |
+| config.defaultRedirect            | <code>string</code>   | Fallback if no next url is supplied to login or on logout                                                                                                                                                                                 |
+| [config.anonymousThreshold=2000]  | <code>number</code>   | Optional. Time in milliseconds before a anonymous session should try a login again?                                                                                                                                                       |
+| [config.extendUser]               | <code>function</code> | Optional Function which gives you the possibility to add custom properties to the user object. The supplied function can be a async. Example: (user, claims) => { user.isAwesome = true } or async (user, claims) => { // do a api call } |
+| [config.log]                      | <code>Object</code>   | Optional Logger object which should have logging functions. Used for logging in this module. Example: logger.error('Error message')                                                                                                       |
+|                                   |
 
 ### Properties on the created OIDC
 
@@ -227,19 +227,6 @@ After you logged in, the client (browser) is trying to call the callback-route i
 The reason for this is that the JWT information contains a timestamp. If the timestamp differs to much the JWT will be refused and you get a 403.
 
 Check your time settings. Are you synching with a time server? Try to change this to `ntp.kth.se`
-
-### The bounce - handle multiple simultaneous requests
-
-If your app is making/getting multiple calls to routes that are secured with silentLogin then the mechanism might break. The OIDC
-is not made to work like this, and the result is that the session is overwritten.
-
-A simple way to handle this is to let the calling app first redirect the user to the app that gets the multiple calls.
-
-At KTH one example is files-web. So if your app is showing multiple images from files-web, perhaps avatars, you let the user first be redirected to files-web to ensure a correct session and cookie is created, and then you show the page with with the avatars.
-
-When a app sets up silentLogin (in this example files-web), a route is created called bounce. It is found at `/auth/silent/bounce`. It takes a param called `nextUrl`, which is the url that it will return to after the call is made.
-
-In the app showing the avatars we could then add a middleware on the routes affected routes that will make this call.
 
 ```javascript
 const bounceOnFiles = (req, res, next) => {
