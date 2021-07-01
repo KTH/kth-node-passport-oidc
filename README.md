@@ -200,9 +200,14 @@ oidc.requireRole('isAdmin', 'isEditor')
 
 ### v4
 
-NOT TO BE USED IN PRODUCTION FOR THE MOMENT!
+**Important**: SilentLogin now uses the toolbar cookie KTH_SSO_START for deciding if the user should be silently logged in.
 
-Now uses the toolbars cookie for deciding if the user should be silently logged in.
+Basically: if the cookie exists we will try to silently login in the user.
+
+This eliminates a strange behavior for our users.
+Most users considers the Social toolbar as the main place to log in into KTH. But if they used one app before they logged into the toolbar, a session was already created in that app which was anonymous.
+
+By letting the app know, thorough the KTH_SSO_START cookie, that it should try again to log in the user, we get a better flow for the user.
 
 ### v3
 
