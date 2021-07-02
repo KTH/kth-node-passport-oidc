@@ -247,6 +247,8 @@ This solution is currently used in directory-web and files-web.
 
 In Directory-web, the app that makes multiple calls for avatar images, use this middleware on its public routes. It bounces the incoming page requests, if needed, against files-web.
 
+|
+
 ```javascript
 const bounceOnFiles = (req, res, next) => {
   const cookies = Object.keys(req.cookies)
@@ -261,7 +263,7 @@ const bounceOnFiles = (req, res, next) => {
   }
 
   req.session.filesAuthHandling = filesAuthHandling
-  const nextUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+  const nextUrl = encodeURIComponent(req.protocol + '://' + req.get('host') + req.originalUrl)
   // config.files.url = https://www-r.referens.sys.kth.se/files
   return res.redirect(`${config.files.url}/auth/silent/bounce?nextUrl=${nextUrl}`)
 }
@@ -270,12 +272,17 @@ const bounceOnFiles = (req, res, next) => {
 In Files-web, the app that serves avatar images has this routes which handles the bounce request.
 
 ```javascript
+const urlWhitelist = ['localhost', '.kth.se']
+
 server.get(_addProxy('/auth/silent/bounce'), oidc.silentLogin, async (req, res, next) => {
   const nextUrl = req.query.nextUrl
 
   if (!nextUrl) {
-    thiz.logEvent(req, `SilentLogin bounce: Missing nextUrl param`)
     return res.status(400).send('Missing nextUrl param')
+  }
+
+  if (!urlWhitelist.find(whitelisted => nextUrl.includes(whitelisted))) {
+    return res.status(400).send('Not an accepted url')
   }
 
   return res.redirect(nextUrl)
