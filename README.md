@@ -237,7 +237,7 @@ Check your time settings. Are you synching with a time server? Try to change thi
 
 If your app gets multiple simultaneous requests it will break. This is mainly because our session store does not work well with multiple app instances. It can overwrite session data if requests reach the two app instances at the same time.
 
-And since we store ongoing auth information in the session, it will break most of the time.
+And since we store ongoing auth information in the session, it will break most of the time. The last request will most likely succeed.
 
 One way to handle this is to ensure that a login has been made before all the requests are made.
 
@@ -247,7 +247,7 @@ This solution is currently used in directory-web and files-web.
 
 In Directory-web, the app that makes multiple calls for avatar images, use this middleware on its public routes. It bounces the incoming page requests, if needed, against files-web.
 
-|
+> Note: Working locally, localhost:3000 and so on, can be problematic. The KTH_SSO_START cookie has a domain set which will not work with localhost. One way is to simply create a "fake cookie" with the same name.
 
 ```javascript
 const bounceOnFiles = (req, res, next) => {
@@ -269,7 +269,15 @@ const bounceOnFiles = (req, res, next) => {
 }
 ```
 
-In Files-web, the app that serves avatar images has this routes which handles the bounce request.
+**serverSettings.js**
+
+```javascript
+files: {
+  url: getEnv('FILES_URL', devDefaults('http://localhost:3003/files')),
+}
+```
+
+In Files-web, the app that serves avatar images has this routes which handles the bounce request. As you may notice there is a simple whitelisting of the accepted urls to be redirected.
 
 ```javascript
 const urlWhitelist = ['localhost', '.kth.se']
