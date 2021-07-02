@@ -233,18 +233,53 @@ The reason for this is that the JWT information contains a timestamp. If the tim
 
 Check your time settings. Are you synching with a time server? Try to change this to `ntp.kth.se`
 
+### Handling multiple simultaneous requests
+
+If your app gets multiple simultaneous requests it will break. This is mainly because our session store does not work well with multiple app instances. It can overwrite session data if requests reach the two app instances at the same time.
+
+And since we store ongoing auth information in the session, it will break most of the time.
+
+One way to handle this is to ensure that a login has been made before all the requests are made.
+
+#### Example
+
+This solution is currently used in directory-web and files-web.
+
+In Directory-web, the app that makes multiple calls for avatar images, use this middleware on its public routes. It bounces the incoming page requests, if needed, against files-web.
+
 ```javascript
 const bounceOnFiles = (req, res, next) => {
-  if (req.session.bounceOnFiles) {
-    delete req.session.bounceOnFiles
+  const cookies = Object.keys(req.cookies)
+  const filesAuthHandling = `${cookies.includes('files-web.sid')}${cookies.includes('KTH_SSO_START')}`
+
+  // By adding the existence of the two cookies above we create a state. The state
+  // shows if a files-cookie exists and if a KTH_SSO_START cookie exists. If the
+  // state changes during calls we bounce against files-web again to get a correct state
+
+  if (req.session.filesAuthHandling === filesAuthHandling) {
     return next()
   }
 
-  req.session.bounceOnFiles = true
-
+  req.session.filesAuthHandling = filesAuthHandling
   const nextUrl = req.protocol + '://' + req.get('host') + req.originalUrl
+  // config.files.url = https://www-r.referens.sys.kth.se/files
   res.redirect(`${config.files.url}/auth/silent/bounce?nextUrl=${nextUrl}`)
 }
+```
+
+In Files-web, the app that serves avatar images has this routes which handles the bounce request.
+
+```javascript
+server.get(_addProxy('/auth/silent/bounce'), oidc.silentLogin, async (req, res, next) => {
+  const nextUrl = req.query.nextUrl
+
+  if (!nextUrl) {
+    thiz.logEvent(req, `SilentLogin bounce: Missing nextUrl param`)
+    return res.status(400).send('Missing nextUrl param')
+  }
+
+  return res.redirect(nextUrl)
+})
 ```
 
 ## Development
