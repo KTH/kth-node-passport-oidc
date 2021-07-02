@@ -263,7 +263,7 @@ const bounceOnFiles = (req, res, next) => {
   req.session.filesAuthHandling = filesAuthHandling
   const nextUrl = req.protocol + '://' + req.get('host') + req.originalUrl
   // config.files.url = https://www-r.referens.sys.kth.se/files
-  res.redirect(`${config.files.url}/auth/silent/bounce?nextUrl=${nextUrl}`)
+  return res.redirect(`${config.files.url}/auth/silent/bounce?nextUrl=${nextUrl}`)
 }
 ```
 
