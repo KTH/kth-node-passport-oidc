@@ -32,7 +32,7 @@
   "homepage": "https://github.com/KTH/kth-node-passport-oidc#readme",
   "devDependencies": {
     "@kth/eslint-config-kth": "^1.0.10",
-    "dotenv": "^9.0.0",
+    "dotenv": "^10.0.0",
     "eslint": "^7.25.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
