@@ -106,7 +106,6 @@ The function makes changes directly to the user object and must have this signat
 | [config.callbackLogoutUrl]        | <code>string</code>   | Optional This apps full URL to callback function for logout. Example: http://localhost:3000/node/auth/logout/callback                                                                                                                     |
 | [config.callbackLogoutRoute]      | <code>string</code>   | Optional The logout callback route used for setting up the express route. Same as config.callbackUrl without host. Example: /node/auth/logout/callback                                                                                    |
 | config.defaultRedirect            | <code>string</code>   | Fallback if no next url is supplied to login or on logout                                                                                                                                                                                 |
-| [config.anonymousThreshold=2000]  | <code>number</code>   | Optional. Time in milliseconds before a anonymous session should try a login again?                                                                                                                                                       |
 | [config.extendUser]               | <code>function</code> | Optional Function which gives you the possibility to add custom properties to the user object. The supplied function can be a async. Example: (user, claims) => { user.isAwesome = true } or async (user, claims) => { // do a api call } |
 | [config.log]                      | <code>Object</code>   | Optional Logger object which should have logging functions. Used for logging in this module. Example: logger.error('Error message')                                                                                                       |
 |                                   |
@@ -207,11 +206,11 @@ Basically: if the cookie exists we will try to silently login in the user.
 This eliminates a strange behavior for our users.
 Most users considers the Social toolbar as the main place to log in into KTH. But if they used one app before they logged into the toolbar, a session was already created in that app which was anonymous.
 
-By letting the app know, thorough the KTH_SSO_START cookie, that it should try again to log in the user, we get a better flow for the user.
+By letting the app know, through the KTH_SSO_START cookie, that it should try again to log in the user, we get a better flow for the user.
 
 ### v3
 
-Changes how the data in the session is stored during login. Also adds the possibility to configure a logger which can be used to debug.
+Changes how the data in the session is stored during login.
 
 ### v2
 
