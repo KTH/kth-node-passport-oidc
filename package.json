@@ -45,6 +45,7 @@
     "pretty-quick": "^3.1.1"
   },
   "dependencies": {
+    "kth-node-log": "^3.1.9",
     "openid-client": "^4.7.4"
   },
   "prettier": {
