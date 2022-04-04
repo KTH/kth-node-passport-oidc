@@ -5,6 +5,8 @@
   "description": "OpenId Connect Express middleware, strategy and utils",
   "main": "lib/index.js",
   "scripts": {
+    "lint": "eslint \"**/*.js\" --quiet",
+    "lint-v": "eslint \"**/*.js\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:notify": "jest --watch --notify",
@@ -31,9 +33,9 @@
   },
   "homepage": "https://github.com/KTH/kth-node-passport-oidc#readme",
   "devDependencies": {
-    "@kth/eslint-config-kth": "^2.0.1",
+    "@kth/eslint-config-kth": "^3.0.6",
     "dotenv": "^10.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.12.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "husky": "^7.0.2",
