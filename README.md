@@ -5,7 +5,7 @@ Simple and configurable package for OpenID Connect authentication. Based on [nod
 ## Quick start
 
 ```bash
-$ npm install @kth/kth-node-passport-oidc.git
+$ npm install @kth/kth-node-passport-oidc
 ```
 
 ```js
