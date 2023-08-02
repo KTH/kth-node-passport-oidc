@@ -1,16 +1,18 @@
 {
   "name": "@kth/kth-node-passport-oidc",
-  "version": "5.0.0",
-  "automaticPublish": "true",
+  "version": "5.0.5",
   "description": "OpenId Connect Express middleware, strategy and utils",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "lint": "eslint \"**/*.js\" --quiet",
     "lint-v": "eslint \"**/*.js\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:notify": "jest --watch --notify",
-    "build": "npm install && npm test",
+    "build": "npm ci",
     "buildApiDocs": " ./node_modules/jsdoc-to-markdown/bin/cli.js ./lib/oidc.js > api.md",
     "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
   },
