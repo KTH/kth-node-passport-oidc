@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "@kth/log": "^4.0.5",
-    "openid-client": "^4.9.1"
+    "openid-client": "^6.1.6"
   },
   "prettier": {
     "arrowParens": "avoid",
