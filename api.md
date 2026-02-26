@@ -24,6 +24,8 @@
 <dd></dd>
 <dt><a href="#requireRole">requireRole(roles)</a> ⇒ <code>Middleware</code></dt>
 <dd></dd>
+<dt><a href="#isLoggedIn">isLoggedIn(req, res, next)</a></dt>
+<dd></dd>
 </dl>
 
 <a name="OIDC"></a>
@@ -58,7 +60,7 @@ Setup OIDC with express
 | config.defaultRedirect            | <code>string</code>   | Fallback if no next url is supplied to login or on logout                                                                                                                                                                                 |
 | [config.extendUser]               | <code>function</code> | Optional Function which gives you the possibility to add custom properties to the user object. The supplied function can be a async. Example: (user, claims) => { user.isAwesome = true } or async (user, claims) => { // do a api call } |
 | [config.log]                      | <code>Object</code>   | Optional Logger object which should have logging functions. Used for logging in this module. Example: logger.error('Error message')                                                                                                       |
-| [config.setIsOwner]               | <code>boolean</code>  | Optional flag with false as default. When used with requireRole, user objects includes an isOwner attribute which is set to true only if req.parameter contains the same username as the logged in username.                              |
+| [config.checkIsOwner]             | <code>boolean</code>  | Optional flag with false as default. When used with requireRole, req.param.username is checked if it has the same username as logged in user.                                                                                             |
 
 <a name="login"></a>
 
@@ -132,7 +134,7 @@ oidc.logout
 A role is a property found on the user object and has most
 likely been added through the optional extendUser function parameter. @see {config.extendUser}
 
-If config.setIsOwner is set, the user object gets additional property (isOwner) which is set only if the req.parameter has the same username  
+If config.checkIsOwner is set, the req.parameter is checked if it has has the same username as logged in user  
 **Api**: public
 
 | Param | Type                              | Description                                                        |
@@ -143,4 +145,23 @@ If config.setIsOwner is set, the user object gets additional property (isOwner) 
 
 ```js
 oidc.requireRole('isAdmin', 'isEditor')
+```
+
+<a name="isLoggedIn"></a>
+
+## isLoggedIn(req, res, next)
+
+**Kind**: global function  
+**Summary**: Middleware function to check if the user is logged in
+
+| Param | Type                  | Description                      |
+| ----- | --------------------- | -------------------------------- |
+| req   | <code>Object</code>   | Express request object           |
+| res   | <code>Object</code>   | Express response object          |
+| next  | <code>function</code> | Express next middleware function |
+
+**Example**
+
+```js
+oidc.isLoggedIn
 ```
