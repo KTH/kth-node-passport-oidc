@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/KTH/kth-node-passport-oidc#readme",
   "devDependencies": {
-    "@kth/eslint-config-kth": "^3.7.0",
+    "@kth/eslint-config-kth": "^4.0.0",
     "dotenv": "^17.4.2",
     "eslint": "^8.57.1",
     "express": "^4.22.1",
