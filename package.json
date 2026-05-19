@@ -1,6 +1,6 @@
 {
   "name": "@kth/kth-node-passport-oidc",
-  "version": "6.0.0-0",
+  "version": "6.0.0",
   "description": "OpenId Connect Express middleware, strategy and utils",
   "engines": {
     "node": ">=24"
