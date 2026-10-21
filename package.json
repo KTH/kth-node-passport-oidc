@@ -38,17 +38,17 @@
   },
   "homepage": "https://github.com/KTH/kth-node-passport-oidc#readme",
   "devDependencies": {
-    "@kth/eslint-config-kth": "^3.7.0",
-    "dotenv": "^17.4.2",
-    "eslint": "^8.57.1",
-    "express": "^4.22.2",
+    "@kth/eslint-config-kth": "^4.1.0",
+    "dotenv": "^18.0.9",
+    "eslint": "^9.39.5",
+    "express": "^4.22.3",
     "express-session": "^1.19.0",
     "husky": "^9.1.7",
-    "jest": "^30.4.2",
+    "jest": "^30.5.2",
     "jest-extended": "^7.0.0",
     "jsdoc-to-markdown": "^9.1.3",
     "passport": "^0.7.0",
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.10",
     "pretty-quick": "^4.2.2"
   },
   "dependencies": {
